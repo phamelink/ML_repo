@@ -7,6 +7,7 @@ from helpers import batch_iter
 from costs import compute_loss
 
 
+
 def compute_stoch_gradient(y, tx, w):
     """Compute a stochastic gradient at w from just few examples n and their corresponding y_n labels.
 
@@ -23,7 +24,12 @@ def compute_stoch_gradient(y, tx, w):
     # INSERT YOUR CODE HERE
     # TODO: implement stochastic gradient computation. It's the same as the usual gradient.
     # ***************************************************
-    raise NotImplementedError
+    N = len(y)
+    e = y - tx @ w
+    tx_T = np.transpose(tx)
+    gd = tx_T @ e
+    
+    return (-1/N) * gd
 
 
 def stochastic_gradient_descent(y, tx, initial_w, batch_size, max_iters, gamma):
